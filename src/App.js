@@ -1,24 +1,22 @@
-import { ThemeProvider } from '@material-ui/styles';
 import React from 'react';
-import './App.css';
+import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home'
 import SignIn from './pages/SignIn';
 import theme from './theme'
 
 function App() {
-
-  const url = window.location.href
   return (
     <ThemeProvider theme={theme}> 
-    {
-      url === 'http://localhost:3000/'
-      ? <Home />  
-      : <SignIn />
-    }
-
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="*" element={<h1>Not found 404</h1>} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
-    
   );
 }
 
