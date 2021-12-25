@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles, Card, CardHeader, CardContent, CardActions, CardActionArea, Typography, Avatar, IconButton } from "@material-ui/core"
 import { Favorite, Bookmark, Message } from "@material-ui/icons";
-import { mergeClasses } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,7 +56,7 @@ function PostCard({ post }) {
            <CardActions disableSpacing>
                <IconButton aria-label="like">
                    <Favorite />
-                   <Typography style={{cursos: 'pointer'}}
+                   <Typography style={{cursor: 'pointer'}}
                     color="textSecondary"
                     variant="body2"
                    >
