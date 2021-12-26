@@ -1,7 +1,8 @@
-import React from "react";
-import { makeStyles, Typography, Grid, Box, Avatar, TextField, Button, Link } from "@material-ui/core"
+import React, { useState } from "react";
+import { makeStyles, Typography, Grid, Box, Avatar, TextField, Button, Link, FormHelperText } from "@material-ui/core"
 import { Lock } from "@material-ui/icons"
 import { useNavigate } from 'react-router-dom'
+import authService from '../../services/authService'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,34 +26,6 @@ const useStyles = makeStyles((theme) => ({
     form: {
         margin: theme.spacing(2, 4)
     }
-    //Exemplo usando div
-    // root: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     height: '100vh'
-    // },
-    // left: {
-    //     background: 'blue',
-    //     flexGrow: 1,
-    //     flexBasis: '58%',
-
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     alignItems: 'center '
-
-    // },
-    // right: {
-    //     background: 'yellow',
-    //     flexGrow: 1,
-    //     flexBasis: '42%'
-    // },
-    // form: {
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     margin: '64px 32px',
-    //     alignItems: 'center'
-    // }
 }))
 
 function Copyright() {
@@ -68,6 +41,19 @@ function Copyright() {
 function SignIn() {
     const classes = useStyles()
     const navigate = useNavigate()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    async function handleSignIn() {
+        try {
+            await authService.signIn(email, password)
+
+            navigate('/')
+        } catch (error) {
+            setErrorMessage(error.response.data.message)
+        }
+    }
 
     return (
         <Grid container className={classes.root}>
@@ -86,9 +72,14 @@ function SignIn() {
                     </Avatar>
                     <Typography variant='h5'>Acesso</Typography>
                     <form className={classes.form}>
-                        <TextField variant='outlined' margin='normal' required fullWidth id='email' label='E-mail' name='email' autoComplete='email' autoFocus />
-                        <TextField variant='outlined' margin='normal' required fullWidth id='password' label='Senha' name='password' autoComplete='current-password' />
-                        <Button fullWidth variant='contained' color='primary' className={classes.button} onClick={() => navigate('/')}>Entrar</Button>
+                        <TextField variant='outlined' margin='normal' required fullWidth id='email' label='E-mail' name='email' autoComplete='email' autoFocus value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <TextField variant='outlined' margin='normal' required fullWidth id='password' label='Senha' name='password' type='password' autoComplete='current-password' value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <Button fullWidth variant='contained' color='primary' className={classes.button} onClick={handleSignIn}>Entrar</Button>
+                        {
+                            errorMessage && <FormHelperText error>
+                                { errorMessage }
+                            </FormHelperText>
+                        }
                         <Grid container>
                             <Grid item>
                                 <Link>Esqueceu sua senha?</Link>
@@ -102,31 +93,6 @@ function SignIn() {
                 </Box>
             </Grid>
         </Grid>
-
-        //Exemplo usando div
-        /* Flex Container */
-        // <div className={classes.root}>
-            
-        //     {/* Flex Item / Comtainer */}
-        //     <div className={classes.left}>
-        //         <Typography style={{color: '#FFF', fontSize: 35, lineHeight: '45px'}}>
-        //             <strong>Simplificando a forma de conectar desenvolvedores de software!</strong>
-        //         </Typography>
-        //         <Typography variant='body2' style={{color: 'rgb(255,255,255,0.7)', marginTop: 30, fontSize: 15, lineHeight: '30px'}}>
-        //             Compartilhe seu conhecimento com toda nossa rede de desenvolvedores de software.
-        //         </Typography>
-        //     </div>
-
-        //     {/* Flex Item */}
-        //     <div className={classes.right}>
-        //         <form className={classes.form}>
-        //             <h4>Acesso</h4>
-        //             <input type="text" />
-        //             <input type="text" />
-        //         </form>
-        //     </div>
-
-        // </div>
     )
 }
 
