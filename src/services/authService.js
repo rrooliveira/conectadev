@@ -1,5 +1,4 @@
 import axios from '../utils/axios'
-
 class AuthService {
 
     signIn = (email, password) => {
@@ -7,8 +6,6 @@ class AuthService {
             axios.post('/api/home/login', {email, password})
             .then(response => {
                 if (response.data.user) {
-                    //Save data user at localStorage
-                    this.setUser(response.data.user)
                     resolve(response.data.user)
                 } else {
                     reject(response.data.error)
