@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from '@material-ui/styles'
 import { Button, AppBar, Toolbar, SvgIcon, Avatar } from "@material-ui/core";
 import { Bell } from "react-feather";
+import authService from "../../../services/authService";
 
 const useStyles = makeStyles({
     appBar: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
     }
 })
 
+const user = authService.getUser()
 
 function Header() {
     const classes = useStyles()
@@ -37,16 +39,7 @@ function Header() {
                     <Button color="primary" variant="contained" className={classes.button}>Novo Post</Button>
                 </div>
                 <SvgIcon className={classes.bell}><Bell></Bell></SvgIcon>
-                <Avatar alt="Rodrigo Oliveira" src="/" />
-                {/* <div className="">
-                    <a href="/">Conecta Dev</a>
-                    <input type="text"></input>
-                </div>
-                <div className="">
-                    <Button color="primary" variant="contained">Novo Post</Button>
-                    <span>img1</span>
-                    <span>img2</span>
-                </div>*/}
+                <Avatar alt="Rodrigo Oliveira" src={user && user.avatar} />
             </Toolbar> 
         </AppBar>
     )

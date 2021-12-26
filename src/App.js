@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import GuestRoute from './routes/GuestRoute'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn';
 import theme from './theme'
