@@ -24,7 +24,6 @@ function Account() {
     const handleSignOut = () => {
         handleClose()
         dispatch(signOut())
-        //navigate('/')
     }
 
     const signIn = () => {

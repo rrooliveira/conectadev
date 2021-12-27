@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from '@material-ui/styles'
-import { Button, AppBar, Toolbar, SvgIcon } from "@material-ui/core";
-import { Bell } from "react-feather";
+import { AppBar, Toolbar, Box } from "@material-ui/core";
 import Account from './Account'
+import Notifications from './Notifications'
+import WritePost from "./WritePost";
 
 const useStyles = makeStyles({
     appBar: {
@@ -17,12 +18,6 @@ const useStyles = makeStyles({
     userSection: {
         display: 'flex',
         alignItems: 'center'
-    },
-    button: {
-        marginRight: 10
-    },
-    bell: {
-        marginRight: 10
     }
 })
 function Header() {
@@ -34,10 +29,14 @@ function Header() {
                 <img src="/images/logo.png" alt="Logo Conecta Dev" className={classes.img} />
                 <div className={classes.grow}></div>
                 <div className={classes.userSection}>
-                    <Button color="primary" variant="contained" className={classes.button}>Novo Post</Button>
+                    <WritePost />
                 </div>
-                <SvgIcon className={classes.bell}><Bell></Bell></SvgIcon>
-                <Account />
+                <Box ml={2}>
+                    <Notifications />
+                </Box>
+                <Box ml={2}>
+                    <Account />
+                </Box>
             </Toolbar> 
         </AppBar>
     )
