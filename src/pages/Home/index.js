@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         flexDirection: 'column'
     },
     main: {
-        height: '100vh',
+        height: 'calc(100vh - 64px)',
         padding: 24
     },
     toolbar: {
@@ -31,7 +31,7 @@ function Home() {
                 <Routes>
                     <Route path="/" element={<Feed />} />
                     <Route path="/feed" element={<Feed />} />
-                    <Route path="/posts" element={<NewPost />} />
+                    <Route path="/post/new" element={<NewPost />} />
                     <Route path="*" element={<h1>Not found 404</h1>} /> 
                 </Routes>
             </main>      
