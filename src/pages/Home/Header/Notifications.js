@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { SvgIcon, IconButton, Popover, Typography, Box, Avatar, List, ListItem, ListItemText, ListItemAvatar } from "@material-ui/core";
 import { useSelector, useDispatch } from 'react-redux'
-import { getNotifications } from "../../../../actions/notificationActions"
+import { getNotifications } from "../../../actions/notificationActions"
 import { makeStyles } from '@material-ui/styles';
 import { 
     Bell as BellIcon, 
@@ -76,7 +76,7 @@ function Notifications() {
                 {notifications.map((notification) => {
                     const Icon = iconsMap[notification.type]
                     return (
-                        <ListItem>
+                        <ListItem key={notification.id}>
                             <ListItemAvatar>
                                 <Avatar className={classes.icon} >
                                     <SvgIcon>
