@@ -1,60 +1,39 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core"
-import { Container, Box } from "@material-ui/core";
-
+import React, {useCallback, useEffect, useState} from "react";
+import {Container, Box, Hidden, makeStyles} from "@material-ui/core";
 import PostCard from "../../components/PostCard";
 import NavBar from "./NavBar"
+import axios from '../../utils/axios';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+    root: {}
 }))
 
-const posts = [
-    { 
-        id: 1, 
-        author: {
-            id: 1,
-            name: 'Rodrigo Ruy Oliveira',
-            username: 'rodrigoruyoliveira',
-            avatar: '/images/avatars/avatar_1.jpeg'
-        },
-        title: 'Criando um App do zero utilizando o React.js',
-        date: 'Dezembro 24, 2021',
-        description: 'Fala pessoal! Qual o framework favorito de vocês?',
-        hashtags: '#reactjs, #javascript, #developer, #frontend',
-        image: '/images/posts/post9.jpeg'
-    },
-    { 
-        id: 2, 
-        author: {
-            id: 1,
-            name: 'Rodrigo Ruy Oliveira',
-            username: 'rodrigoruyoliveira',
-            avatar: '/images/avatars/avatar_1.jpeg'
-        },
-        title: 'Comparativo entre React.js e Vue.js - Performance',
-        date: 'Dezembro 24, 2021',
-        description: 'Vou criar um bootcamp gratuito para passar um pouco da minha experiência. Quem topa?',
-        hashtags: '#reactjs, #vuejs, #framework, #frontend',
-        image: '/images/posts/post8.png'
-    },
-]
+function Feed() {
+    const classes = useStyles();
+    const [posts, setPosts] = useState([]);
 
-function Feed(){
-    const classes = useStyles()
+    const getPosts = useCallback(async () => {
+        const feed = await axios.get('/api/feed')
+        setPosts(feed.data.posts)
+    }, [setPosts])
+
+    useEffect(() => {
+        getPosts()
+    }, [getPosts])
 
     return (
         <Container maxWidth="lg">
             <Box display="flex">
-                <NavBar />
+                <Hidden smDown>
+                    <NavBar />
+                </Hidden>
                 <div className={classes.root}>
-                    { 
-                        posts.map((post) => (
-                            <PostCard key={post.id} post={post} />
-                        ))
-                    }
+                    {posts.map((post) => (
+                        <PostCard key={post.id} post={post} />
+                    ))}
                 </div>
             </Box>
-        </Container> 
+        </Container>
     )
 }
 
