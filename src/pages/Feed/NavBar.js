@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, Paper, Button, ListSubheader, ListItem, ListItemText }  from "@material-ui/core"
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,11 +23,16 @@ const tags = [
 ]
 
 function NavBar(){
-    const classes = useStyles();
+    const classes = useStyles()
+    const navigate = useNavigate()
+
+    const handleSignUp = () => (
+        navigate('/sign-up')
+    )
 
     return (
         <Paper className={classes.root}>
-            <Button variant="outlined" color="secondary" className={classes.button}>Registrar Grátis</Button>
+            <Button variant="outlined" color="secondary" className={classes.button} onClick={handleSignUp}>Registrar Grátis</Button>
             <ListSubheader>{`Tags em alta`}</ListSubheader>
             {
                 tags.map((item) => (

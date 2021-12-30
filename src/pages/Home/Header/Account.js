@@ -30,6 +30,14 @@ function Account() {
         navigate('/sign-in')
     }
 
+    const signUp = () => {
+        navigate('/sign-up')
+    }
+
+    const handlePerfil = () => {
+        navigate('/profile/' + account.user.username)
+    }
+
     return (
         <>
             <Avatar ref={ref} onClick={handleOpen} alt="Rodrigo Oliveira" src={account.user && account.user.avatar} />
@@ -42,7 +50,7 @@ function Account() {
                     onClose={handleClose}
                     getContentAnchorEl={null}
                 >
-                    <MenuItem>Perfil</MenuItem>
+                    <MenuItem onClick={handlePerfil}>Perfil</MenuItem>
                     <MenuItem>Meus Favoritos</MenuItem>
                     <MenuItem>Meus Posts</MenuItem>
                     <MenuItem>Minhas Conexões</MenuItem>
@@ -56,7 +64,7 @@ function Account() {
                     onClose={handleClose}
                     getContentAnchorEl={null}
                 >
-                    <MenuItem>Registrar Grátis</MenuItem>
+                    <MenuItem onClick={signUp}>Registrar Grátis</MenuItem>
                     <MenuItem onClick={signIn}>Entrar</MenuItem>
                 </Menu>
             }

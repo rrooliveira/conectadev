@@ -63,7 +63,7 @@ mock.onGet('/api/feed').reply(200, {
     ]
 })
 
-mock.onGet('/api/posts/user/rodrigooliveira').reply(200, {
+mock.onGet('/api/posts/user/rrooliveira').reply(200, {
     posts: [
         {
             id: 1,

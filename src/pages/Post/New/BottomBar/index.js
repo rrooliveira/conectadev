@@ -1,7 +1,7 @@
 import React from 'react'
 import {AppBar, Button, Toolbar} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
-import {usePost} from "../../../../context/PostContext";
+//import {usePost} from "../../../../context/PostContext";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 function BottomBar() {
     const classes = useStyles()
+    // TODO
+    /*
     const context = usePost()
 
     const handleSaveDraft = () => {
@@ -21,6 +23,7 @@ function BottomBar() {
     const handleSavePublish = () => {
         //Access backend and save publish
     }
+    */
 
     return (
         <AppBar position='fixed' color='inherit' className={classes.appBar}>
